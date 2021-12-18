@@ -13,19 +13,43 @@ const CompanyHeader = () => {
 }
 
 const SideBar = () => {
-  return <div>
+  return (
+  <div>
           <AiOutlineLogout />
         </div>
+  )
 };
 
 const ChannelListContainer = () => {
   return (
     <div>
       <SideBar />
-      <CompanyHeader />
-      <ChannelSearch />
+      <div>
+        <CompanyHeader />
+        <ChannelSearch />
+        <ChannelList
+          filters={{}}
+          channelRenderFilterFn={() => {}}
+          List={(listProps) => {
+            return <TeamChannelList {...listProps} type="team" />;
+          }}
+          Preview={(previewProps) => {
+            return <TeamChannelPreview {...previewProps} type="team" />;
+          }}
+        />
+        <ChannelList
+          filters={{}}
+          channelRenderFilterFn={() => {}}
+          List={(listProps) => {
+            return <TeamChannelList {...listProps} type="messaging" />;
+          }}
+          Preview={(previewProps) => {
+            return <TeamChannelPreview {...previewProps} type="messaging" />;
+          }}
+        />
+      </div>
     </div>
-  )
+  );
 }
 
 export default ChannelListContainer
