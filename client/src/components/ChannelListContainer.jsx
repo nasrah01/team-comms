@@ -4,6 +4,8 @@ import Cookies from 'universal-cookie';
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './'
 import { AiOutlineLogout } from 'react-icons/ai'
 
+const cookies = new Cookies();
+
 const CompanyHeader = () => {
   return (
     <div>
@@ -12,18 +14,30 @@ const CompanyHeader = () => {
   )
 }
 
-const SideBar = () => {
+const SideBar = ({logout}) => {
   return (
-  <div>
-          <AiOutlineLogout />
-        </div>
+    <div>
+      <AiOutlineLogout onClick={logout}/>
+    </div>
   )
 };
 
 const ChannelListContainer = () => {
+
+  const logout = () => {
+    cookies.remove('token');
+    cookies.remove("username");
+    cookies.remove("fullName");
+    cookies.remove("userId");
+    cookies.remove("email");
+    cookies.remove("hashedPassword");
+
+    window.location.reload();
+  }
+
   return (
     <div>
-      <SideBar />
+      <SideBar logout={logout}/>
       <div>
         <CompanyHeader />
         <ChannelSearch />

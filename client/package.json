@@ -14,7 +14,6 @@
     "react-scripts": "4.0.3",
     "stream-chat": "^5.0.1",
     "stream-chat-react": "^6.12.2",
-    "styled-components": "^5.3.3",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.2"
   },

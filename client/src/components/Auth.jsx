@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Cookies from 'universal-cookie';
-import Axios from 'axios'
-import { FaSignInAlt } from 'react-icons/fa'
+import axios from 'axios'
+
+const cookies = new Cookies();
 
 const initialState = {
   fullName: '',
@@ -16,9 +17,30 @@ const Auth = () => {
   const [isSignup, setIsSignup] = useState(true);
   const [form, setForm] = useState(initialState);
 
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
+
     e.preventDefault();
-    console.log(form);
+
+    const {fullName, username, password, email} = form;
+
+    const URL = 'http://localhost:5000/auth';
+
+    const { data: {token, userId, hashedPassword} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+      username, fullName, password, email,
+    });
+
+    cookies.set('token', token);
+    cookies.set("username", username);
+    cookies.set("fullName", fullName);
+    cookies.set("userId", userId);
+
+    if(isSignup) {
+      cookies.set("email", email);
+      cookies.set("hashedPassword", hashedPassword);
+    }
+
+    window.location.reload();
+    
   }
 
   const handleChange = (e) => {
@@ -96,7 +118,7 @@ const Auth = () => {
         </form>
         <div>
           <p>
-            {isSignup ? "Already have an account?" : "Do not have an account?"}
+            {isSignup ? "Already have an account?" : "New user?"}
             <span onClick={switchMode}>{isSignup ? "Sign In" : "Sign Up"}</span>
           </p>
         </div>
