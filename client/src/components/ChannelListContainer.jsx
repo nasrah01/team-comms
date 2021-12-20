@@ -22,7 +22,7 @@ const SideBar = ({logout}) => {
   )
 };
 
-const ChannelListContainer = () => {
+const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEditing}) => {
 
   const logout = () => {
     cookies.remove('token');
@@ -45,7 +45,16 @@ const ChannelListContainer = () => {
           filters={{}}
           channelRenderFilterFn={() => {}}
           List={(listProps) => {
-            return <TeamChannelList {...listProps} type="team" />;
+            return (
+              <TeamChannelList
+                {...listProps}
+                type="team"
+                isCreating={isCreating}
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+                setIsEditing={setIsEditing}
+              />
+            );
           }}
           Preview={(previewProps) => {
             return <TeamChannelPreview {...previewProps} type="team" />;
@@ -55,7 +64,16 @@ const ChannelListContainer = () => {
           filters={{}}
           channelRenderFilterFn={() => {}}
           List={(listProps) => {
-            return <TeamChannelList {...listProps} type="messaging" />;
+            return (
+              <TeamChannelList
+                {...listProps}
+                type="messaging"
+                isCreating={isCreating}
+                setIsCreating={setIsCreating}
+                setCreateType={setCreateType}
+                setIsEditing={setIsEditing}
+              />
+            );
           }}
           Preview={(previewProps) => {
             return <TeamChannelPreview {...previewProps} type="messaging" />;
