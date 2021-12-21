@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { getChannel, useChatContext } from 'stream-chat-react';
+import React, { useState } from 'react';
+//import { getChannel, useChatContext } from 'stream-chat-react';
 
 const ChannelSearch = () => {
 

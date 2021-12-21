@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChannelList, userChatContext } from 'stream-chat-react';
+import { ChannelList } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './'
 import { AiOutlineLogout } from 'react-icons/ai'
