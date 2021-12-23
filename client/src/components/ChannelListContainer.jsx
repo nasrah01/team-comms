@@ -22,6 +22,14 @@ const SideBar = ({logout}) => {
   )
 };
 
+const channelTeamFilter = (channels) => {
+  return channels.filter((channel) => channel.type === 'team');
+}
+
+const channelMessageFilter = (channels) => {
+  return channels.filter((channel) => channel.type === "messaging");
+};
+
 const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEditing}) => {
 
   const logout = () => {
@@ -43,7 +51,7 @@ const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEd
         <ChannelSearch />
         <ChannelList
           filters={{}}
-          channelRenderFilterFn={() => {}}
+          channelRenderFilterFn={() => {channelTeamFilter()}}
           List={(listProps) => {
             return (
               <TeamChannelList
@@ -62,7 +70,7 @@ const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEd
         />
         <ChannelList
           filters={{}}
-          channelRenderFilterFn={() => {}}
+          channelRenderFilterFn={() => {channelMessageFilter()}}
           List={(listProps) => {
             return (
               <TeamChannelList

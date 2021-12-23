@@ -37,7 +37,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
 
       setChannelName("");
       setIsCreating(false);
-      setSelectedUsers([client.userID]);
+      setSelectedUsers([client.userId]);
       setActiveChannel(newChannel);
     } catch (error) {
       console.log(error);
@@ -61,9 +61,9 @@ const CreateChannel = ({ createType, setIsCreating }) => {
         />
       )}
       <UserList setSelectedUsers={setSelectedUsers} />
-      <div onClick={createChannel}>
+      <button onClick={createChannel}>
         <p>{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</p>
-      </div>
+      </button>
     </div>
   );
 };
