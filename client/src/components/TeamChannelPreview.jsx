@@ -1,19 +1,22 @@
 import React from 'react';
 import {Avatar, useChatContext} from 'stream-chat-react';
 
-const TeamChannelPreview = ({channel, type}) => {
-
-  const {channel: activeChannel, client} = useChatContext();
+const TeamChannelPreview = ({
+  setActiveChannel,
+  setIsCreating,
+  setIsEditing,
+  channel,
+  type,
+}) => {
+  const { channel: activeChannel, client } = useChatContext();
   const ChannelPreview = () => {
-    return (
-      <p>
-        # {channel?.data?.name || channel?.data?.id}
-      </p>
-    )
+    return <p># {channel?.data?.name || channel?.data?.id}</p>;
   };
 
   const DirectPreview = () => {
-    const members = Object.values(channel.state.members).filter( ({user}) => user.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user.id !== client.userID
+    );
 
     return (
       <div>
@@ -22,16 +25,16 @@ const TeamChannelPreview = ({channel, type}) => {
           name={members[0]?.user?.fullName}
           size={24}
         />
-        <p>{members[0]?.user?.fullName}</p>
+        <p>{members[0]?.user?.fullName || members[0]?.user?.id}</p>
       </div>
     );
-  }
+  };
 
   return (
     <div onClick={() => console.log(channel)}>
-      {type === 'team' ? <ChannelPreview /> : <DirectPreview />}
+      {type === "team" ? <ChannelPreview /> : <DirectPreview />}
     </div>
-  )
-}
+  );
+};
 
 export default TeamChannelPreview

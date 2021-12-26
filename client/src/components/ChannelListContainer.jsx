@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChannelList } from 'stream-chat-react';
+import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './'
 import { AiOutlineLogout } from 'react-icons/ai'
@@ -23,14 +23,17 @@ const SideBar = ({logout}) => {
 };
 
 const channelTeamFilter = (channels) => {
-  return channels.filter((channel) => channel.type === 'team');
-}
+  return channels.filter((channel) => channel.type === "team");
+};
 
-const channelMessageFilter = (channels) => {
+const channelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === "messaging");
 };
 
-const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEditing}) => {
+
+const ChannelListContent = ({isCreating, setIsCreating, setCreateType, setIsEditing}) => {
+
+  const { client } = useChatContext();
 
   const logout = () => {
     cookies.remove('token');
@@ -43,6 +46,8 @@ const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEd
     window.location.reload();
   }
 
+  const filters = {members: {$in: [client.userID]}};
+
   return (
     <div>
       <SideBar logout={logout}/>
@@ -50,8 +55,8 @@ const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEd
         <CompanyHeader />
         <ChannelSearch />
         <ChannelList
-          filters={{}}
-          channelRenderFilterFn={() => {channelTeamFilter()}}
+          filters={filters}
+          channelRenderFilterFn={channelTeamFilter}
           List={(listProps) => {
             return (
               <TeamChannelList
@@ -69,8 +74,8 @@ const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEd
           }}
         />
         <ChannelList
-          filters={{}}
-          channelRenderFilterFn={() => {channelMessageFilter()}}
+          filters={filters}
+          channelRenderFilterFn={channelMessagingFilter}
           List={(listProps) => {
             return (
               <TeamChannelList
@@ -89,6 +94,21 @@ const ChannelListContainer = ({isCreating, setIsCreating, setCreateType, setIsEd
         />
       </div>
     </div>
+  );
+}
+
+const ChannelListContainer = ({setCreateType, setIsCreating, setIsEditing}) => {
+
+  return (
+    <>
+      <div>
+        <ChannelListContent
+          setIsCreating={setIsCreating}
+          setCreateType={setCreateType}
+          setIsEditing={setIsEditing}
+        />
+      </div>
+    </>
   );
 }
 
