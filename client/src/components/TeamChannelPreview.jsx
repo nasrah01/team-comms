@@ -5,10 +5,12 @@ const TeamChannelPreview = ({
   setActiveChannel,
   setIsCreating,
   setIsEditing,
+  setToggleContainer,
   channel,
-  type,
+  type
 }) => {
   const { channel: activeChannel, client } = useChatContext();
+
   const ChannelPreview = () => {
     return <p># {channel?.data?.name || channel?.data?.id}</p>;
   };
@@ -31,7 +33,16 @@ const TeamChannelPreview = ({
   };
 
   return (
-    <div onClick={() => console.log(channel)}>
+    <div
+      onClick={() => {
+        setIsCreating(false);
+        setIsEditing(false);
+        setActiveChannel(channel);
+        if (setToggleContainer) {
+          setToggleContainer((prevState) => !prevState);
+        }
+      }}
+    >
       {type === "team" ? <ChannelPreview /> : <DirectPreview />}
     </div>
   );

@@ -9,7 +9,8 @@ const initialState = {
   username: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
+  avatar: ''
 
 }
 
@@ -21,12 +22,12 @@ const Auth = () => {
 
     e.preventDefault();
 
-    const {username, password, email} = form;
+    const {username, password, email, avatar} = form;
 
     const URL = 'http://localhost:5000/auth';
 
     const { data: {token, userId, hashedPassword, fullName} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-      username, fullName: form.fullName, password, email,
+      username, fullName: form.fullName, password, email, avatar
     });
 
     cookies.set('token', token);
@@ -37,6 +38,7 @@ const Auth = () => {
     if(isSignup) {
       cookies.set("email", email);
       cookies.set("hashedPassword", hashedPassword);
+      cookies.set("avatar");
     }
 
     window.location.reload();
@@ -78,6 +80,18 @@ const Auth = () => {
               required
             />
           </div>
+          {isSignup && (
+            <div>
+              <label htmlFor="avatar">Avatar</label>
+              <input
+                name="avatar"
+                type="text"
+                placeholder="Avatar URL"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
           {isSignup && (
             <div>
               <label htmlFor="email">Email</label>

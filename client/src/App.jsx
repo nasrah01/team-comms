@@ -17,6 +17,7 @@ if(authToken) {
     name: cookies.get("username"),
     fullName: cookies.get("fullName"),
     id: cookies.get("userId"),
+    avatar: cookies.get("avatar"),
     email: cookies.get("email"),
     hashedPassword: cookies.get("hashedPassword"),
   }, authToken);
