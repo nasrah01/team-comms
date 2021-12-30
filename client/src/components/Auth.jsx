@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import logo from '../assets/images/chat01.png';
+import styled from "styled-components";
 
 const cookies = new Cookies();
 
@@ -55,96 +56,86 @@ const Auth = () => {
   }
 
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <img className="mx-auto h-12 w-auto" src={logo} alt="business logo" />
-          <p className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+    <FormContainer>
+      <FormWrapper>
+        <FormHeader>
+          <img src={logo} alt="business logo"/>
+          <p>
             Team Chat
           </p>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p>
             {isSignup ? "Sign Up" : "Sign In"}
           </p>
-        </div>
+        </FormHeader>
         <form className="mt-8 space-y-6" onSubmit={formSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
-            {isSignup && (
-              <div>
-                <label className="sr-only" htmlFor="fullName">
-                  Full Name
-                </label>
-                <input
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  name="fullName"
-                  type="text"
-                  placeholder="Full Name"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
+          {isSignup && (
             <div>
-              <label htmlFor="username">Username</label>
+              <label htmlFor="fullName">Full Name</label>
               <input
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                name="username"
+                name="fullName"
                 type="text"
-                placeholder="Username"
+                placeholder="Full Name"
                 onChange={handleChange}
                 required
               />
             </div>
-            {isSignup && (
-              <div>
-                <label htmlFor="avatar">Avatar</label>
-                <input
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  name="avatar"
-                  type="text"
-                  placeholder="Avatar URL"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
-            {isSignup && (
-              <div>
-                <label htmlFor="email">Email</label>
-                <input
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  name="email"
-                  type="text"
-                  placeholder="Email"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
-            <div>
-              <label htmlFor="password">Password</label>
-              <input
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            {isSignup && (
-              <div>
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  name="confirmPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            )}
+          )}
+          <div>
+            <label htmlFor="username">Username</label>
+            <input
+              name="username"
+              type="text"
+              placeholder="Username"
+              onChange={handleChange}
+              required
+            />
           </div>
+          {isSignup && (
+            <div>
+              <label htmlFor="avatar">Avatar</label>
+              <input
+                name="avatar"
+                type="text"
+                placeholder="Avatar URL"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+          {isSignup && (
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                name="email"
+                type="text"
+                placeholder="Email"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {isSignup && (
+            <div>
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm Password"
+                onChange={handleChange}
+                required
+              />
+            </div>
+          )}
           <div>
             <button>{isSignup ? "Sign Up" : "Sign In"}</button>
           </div>
@@ -155,9 +146,22 @@ const Auth = () => {
             <span onClick={switchMode}>{isSignup ? "Sign In" : "Sign Up"}</span>
           </p>
         </div>
-      </div>
-    </div>
+      </FormWrapper>
+    </FormContainer>
   );
 }
 
 export default Auth
+
+const FormContainer = styled.div`
+  min-height: 100vh;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const FormWrapper = styled.div`
+  
+`
+const FormHeader = styled.div``;

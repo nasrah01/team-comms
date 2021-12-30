@@ -9,9 +9,9 @@ const cookies = new Cookies();
 const CompanyHeader = () => {
   return (
     <div>
-      <div>Header</div>
+      <div className="text-3xl font-bold underline">Header</div>
     </div>
-  )
+  );
 }
 
 const SideBar = ({logout}) => {
