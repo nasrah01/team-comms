@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
-import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './'
-import { AiOutlineLogout } from 'react-icons/ai'
+import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
+import { AiOutlineLogout } from 'react-icons/ai';
+import styled from "styled-components";
 
 const cookies = new Cookies();
 
@@ -102,37 +103,41 @@ const ChannelListContainer = ({setCreateType, setIsCreating, setIsEditing}) => {
   const [toggleContainer, setToggleContainer] = useState(false);
   return (
     <>
-      <div className="channel-list__container">
-        <ChannelListContent
-          setIsCreating={setIsCreating}
-          setCreateType={setCreateType}
-          setIsEditing={setIsEditing}
-        />
-      </div>
+      <ChatContainer>
+        <div>
+          <ChannelListContent
+            setIsCreating={setIsCreating}
+            setCreateType={setCreateType}
+            setIsEditing={setIsEditing}
+          />
+        </div>
 
-      <div
-        className="channel-list__container-responsive"
-        style={{
-          display: 'none',
-          left: toggleContainer ? "0%" : "-89%",
-          backgroundColor: "#005fff",
-        }}
-      >
         <div
-          className="channel-list__container-toggle"
-          onClick={() =>
-            setToggleContainer((prevToggleContainer) => !prevToggleContainer)
-          }
-        ></div>
-        <ChannelListContent
-          setIsCreating={setIsCreating}
-          setCreateType={setCreateType}
-          setIsEditing={setIsEditing}
-          setToggleContainer={setToggleContainer}
-        />
-      </div>
+          style={{
+            display: "none",
+            left: toggleContainer ? "0%" : "-89%",
+            backgroundColor: "#005fff",
+          }}
+        >
+          <div
+            onClick={() =>
+              setToggleContainer((prevToggleContainer) => !prevToggleContainer)
+            }
+          ></div>
+          <ChannelListContent
+            setIsCreating={setIsCreating}
+            setCreateType={setCreateType}
+            setIsEditing={setIsEditing}
+            setToggleContainer={setToggleContainer}
+          />
+        </div>
+      </ChatContainer>
     </>
   );
 }
 
 export default ChannelListContainer
+
+const ChatContainer = styled.div`
+  border: 5px solid red;
+`

@@ -167,8 +167,10 @@ const FormWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 5px solid blue;
   padding: 3rem;
+  box-shadow: 0px 1px 5px rgb(0, 0, 0, .3);
+  border-radius: 5px;
+  transition: 0.8s ease;
 `;
 const FormHeader = styled.div`
   text-align: center;
@@ -199,7 +201,7 @@ const FormContent = styled.div`
     margin-bottom: 0.45rem;
     color: rgb(61, 79, 88);
     font-size: clamp(1rem, 1vw, 1.4rem);
-    letter-spacing: 0.7px;
+    letter-spacing: 0.4px;
     line-height: 1.3;
   }
 
@@ -227,5 +229,25 @@ const FormContent = styled.div`
   input:active {
     box-shadow: 0px 0px 0px 1.5px #005fff;
     border-color: #005fff;
+  }
+
+  button {
+    border-radius: 4px;
+    background: #005fff;
+    border: 1px solid #005fff;
+    color: #fff;
+    font-weight: 500;
+    padding: 0.7rem 1.2rem;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  button:hover {
+    background: #023c92;
+  }
+
+  span {
+    cursor: pointer;
   }
 `;
