@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useChatContext } from "stream-chat-react";
 import { UserList } from './';
 import { CloseCreateChannel } from "../assets/CloseCreateChannel";
+import styled from 'styled-components';
 
 const ChannelNameInput = ({ channelName = "", setChannelName }) => {
   const handleChange = (e) => {
@@ -45,17 +46,23 @@ const EditChannel = ({setIsEditing}) => {
     setSelectedUsers([]);
   }
 
-  return <div>
-    <div>
-      <p>Edit Channel</p>
-      <CloseCreateChannel  setIsEditing={setIsEditing}/>
-      <ChannelNameInput channelName={channelName} setChannelName={setChannelName}/>
-      <UserList setSelectedUsers={setSelectedUsers} />
-      <div onClick={updateChannel}>
-        <button>Save Changes</button>
+  return (
+    <EditContainer>
+      <div>
+        <p>Edit Channel</p>
+        <CloseCreateChannel  setIsEditing={setIsEditing}/>
+        <ChannelNameInput channelName={channelName} setChannelName={setChannelName}/>
+        <UserList setSelectedUsers={setSelectedUsers} />
+        <div onClick={updateChannel}>
+          <button>Save Changes</button>
+        </div>
       </div>
-    </div>
-  </div>;
+    </EditContainer>
+  )
 };
 
 export default EditChannel;
+
+const EditContainer = styled.div`
+  border: 1px solid indigo;
+`

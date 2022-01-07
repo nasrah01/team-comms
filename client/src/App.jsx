@@ -31,23 +31,33 @@ function App() {
   if(!authToken) return <Auth />
   return (
     <div>
+      <ChannelContainerWrapper>
       <Chat client={client} theme="team light">
-        <ChannelListContainer
-          isCreating={isCreating}
-          setIsCreating={setIsCreating}
-          setCreateType={setCreateType}
-          setIsEditing={setIsEditing}
-        />
-        <ChannelContainer
-          isCreating={isCreating}
-          setIsCreating={setIsCreating}
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
-          createType={createType}
-        />
+          <ChannelListContainer
+            isCreating={isCreating}
+            setIsCreating={setIsCreating}
+            setCreateType={setCreateType}
+            setIsEditing={setIsEditing}
+          />
+          <ChannelContainer
+            isCreating={isCreating}
+            setIsCreating={setIsCreating}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            createType={createType}
+          />
       </Chat>
+      </ChannelContainerWrapper>
     </div>
   );
 }
 
 export default App;
+
+const ChannelContainerWrapper = styled.div`
+  border: 5px solid orange;
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  background: lightsalmon;
+`

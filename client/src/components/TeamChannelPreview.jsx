@@ -1,5 +1,6 @@
-import React from 'react';
-import {Avatar, useChatContext} from 'stream-chat-react';
+import React from "react";
+import { Avatar, useChatContext } from "stream-chat-react";
+import styled from 'styled-components';
 
 const TeamChannelPreview = ({
   setActiveChannel,
@@ -7,13 +8,15 @@ const TeamChannelPreview = ({
   setIsEditing,
   setToggleContainer,
   channel,
-  type
+  type,
 }) => {
   const { channel: activeChannel, client } = useChatContext();
 
-  const ChannelPreview = () => {
-    return <p># {channel?.data?.name || channel?.data?.id}</p>;
-  };
+  const ChannelPreview = () => (
+    <p>
+      # {channel?.data?.name || channel?.data?.id}
+    </p>
+  );
 
   const DirectPreview = () => {
     const members = Object.values(channel.state.members).filter(
@@ -24,7 +27,7 @@ const TeamChannelPreview = ({
       <div>
         <Avatar
           image={members[0]?.user?.image}
-          name={members[0]?.user?.fullName}
+          name={members[0]?.user?.fullName || members[0]?.user?.id}
           size={24}
         />
         <p>{members[0]?.user?.fullName || members[0]?.user?.id}</p>
@@ -33,7 +36,12 @@ const TeamChannelPreview = ({
   };
 
   return (
-    <div
+    <PreviewContainer
+      className={
+        channel?.id === activeChannel?.id
+          ? "channel-preview__wrapper__selected"
+          : "channel-preview__wrapper"
+      }
       onClick={() => {
         setIsCreating(false);
         setIsEditing(false);
@@ -44,8 +52,12 @@ const TeamChannelPreview = ({
       }}
     >
       {type === "team" ? <ChannelPreview /> : <DirectPreview />}
-    </div>
+    </PreviewContainer>
   );
 };
 
-export default TeamChannelPreview
+export default TeamChannelPreview;
+
+const PreviewContainer = styled.div`
+  background: lightskyblue;
+`

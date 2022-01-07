@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useChatContext } from 'stream-chat-react';
 import { ResultsDropdown } from './';
+import styled from 'styled-components';
 
 const ChannelSearch = ({ setToggleContainer }) => {
   const {client, setActiveChannel} = useChatContext();
@@ -53,7 +54,7 @@ const ChannelSearch = ({ setToggleContainer }) => {
   }
 
   return (
-    <div>
+    <SearchContainer>
       <div>search Icon</div>
       <div>
         <input placeholder="" type="text" value={query} onChange={onSearch} />
@@ -68,8 +69,12 @@ const ChannelSearch = ({ setToggleContainer }) => {
           setToggleContainer={setToggleContainer}
         />
       )}
-    </div>
+    </SearchContainer>
   );
 }
 
 export default ChannelSearch
+
+const SearchContainer = styled.div`
+  border: 5px solid green;
+`

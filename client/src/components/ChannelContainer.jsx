@@ -1,6 +1,8 @@
 import React from 'react';
 import { Channel, VirtualizedMessageList } from 'stream-chat-react';
 import { ChannelInner, CreateChannel, EditChannel } from './';
+import styled from 'styled-components';
+
 
 const ChannelContainer = ({isCreating, setIsCreating, isEditing, setIsEditing, createType}) => {
 
@@ -31,14 +33,23 @@ const ChannelContainer = ({isCreating, setIsCreating, isEditing, setIsEditing, c
   }
 
   return (
-    <div>
+    <ChannelContents>
       <Channel EmptyStateIndicator={EmptyState}>
         <VirtualizedMessageList />
-        <ChannelInner setIsEditing={setIsEditing}/>
+        <ChannelContWrap><ChannelInner setIsEditing={setIsEditing} /></ChannelContWrap>
+        
       </Channel>
-    </div>
-  )
+    </ChannelContents>
+  );
 }
 
 export default ChannelContainer
 
+const ChannelContents = styled.div`
+  border: 5px solid brown;
+  background: lightpink;
+`
+
+const ChannelContWrap = styled.div`
+  background: pink;
+`

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useChatContext } from 'stream-chat-react';
 import { UserList } from './';
 import { CloseCreateChannel } from "../assets/CloseCreateChannel";
+import styled from 'styled-components';
 
 const ChannelNameInput = ({ channelName='', setChannelName}) => {
 
@@ -45,7 +46,7 @@ const CreateChannel = ({ createType, setIsCreating }) => {
   };
  
   return (
-    <div>
+    <CreateContainer>
       <div>
         <p>
           {createType === "team"
@@ -64,8 +65,13 @@ const CreateChannel = ({ createType, setIsCreating }) => {
       <button onClick={createChannel}>
         <p>{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</p>
       </button>
-    </div>
+    </CreateContainer>
   );
 };
 
 export default CreateChannel;
+
+
+const CreateContainer = styled.div`
+  border: 5px solid blue;
+`

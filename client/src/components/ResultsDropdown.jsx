@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, useChatContext } from "stream-chat-react";
+import styled from 'styled-components';
 
 const channelByUser = async ({
   client,
@@ -91,15 +92,15 @@ const ResultsDropdown = ({
   setToggleContainer,
 }) => {
   return (
-    <div className="channel-search__results">
-      <p className="channel-search__results-header">Channels</p>
+    <ResultsContainer>
+      <p>Channels</p>
       {loading && !teamChannels.length && (
-        <p className="channel-search__results-header">
+        <p>
           <i>Loading...</i>
         </p>
       )}
       {!loading && !teamChannels.length ? (
-        <p className="channel-search__results-header">
+        <p>
           <i>No channels found</i>
         </p>
       ) : (
@@ -114,14 +115,14 @@ const ResultsDropdown = ({
           />
         ))
       )}
-      <p className="channel-search__results-header">Users</p>
+      <p>Users</p>
       {loading && !directChannels.length && (
-        <p className="channel-search__results-header">
+        <p>
           <i>Loading...</i>
         </p>
       )}
       {!loading && !directChannels.length ? (
-        <p className="channel-search__res ults-header">
+        <p>
           <i>No direct messages found</i>
         </p>
       ) : (
@@ -136,8 +137,12 @@ const ResultsDropdown = ({
           />
         ))
       )}
-    </div>
+    </ResultsContainer>
   );
 };
 
 export default ResultsDropdown;
+
+const ResultsContainer = styled.div`
+  background: lightcoral;
+`

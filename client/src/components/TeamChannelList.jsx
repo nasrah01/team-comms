@@ -1,5 +1,6 @@
 import React from 'react';
 import { AddChannel } from '../assets/AddChannel';
+import styled from 'styled-components';
 
 
 const TeamChannelList = ({children, error = false, loading, type, isCreating, setIsCreating, setCreateType, setIsEditing}) => {
@@ -20,7 +21,7 @@ const TeamChannelList = ({children, error = false, loading, type, isCreating, se
   }
 
   return (
-    <div>
+    <ListContainer>
       <div>
         <p>{type === "team" ? "Channels" : "Direct Messages"}</p>
         <AddChannel
@@ -32,8 +33,13 @@ const TeamChannelList = ({children, error = false, loading, type, isCreating, se
         />
       </div>
       {children}
-    </div>
+    </ListContainer>
   );
 };
 
 export default TeamChannelList;
+
+const ListContainer = styled.div`
+  background: lightgreen;
+  border: 5px solid green;
+`

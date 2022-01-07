@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext, Avatar, useChannelStateContext, useChatContext } from "stream-chat-react";
-
-import {ChannelInfo} from '../assets/ChannelInfo'
+import {ChannelInfo} from '../assets/ChannelInfo';
+import styled from 'styled-components';
 
 export const GiphyContext = React.createContext({});
 
@@ -94,15 +94,19 @@ const TeamChannelHeader = ({ setIsEditing }) => {
   };
 
   return (
-    <div>
+    <MessagingContainer>
       <MessagingHeader />
       <div>
         <p>
           {getWatcherText(watcher_count)}
         </p>
       </div>
-    </div>
+    </MessagingContainer>
   );
 };
 
 export default ChannelInner;
+
+const MessagingContainer = styled.div`
+  border: 5px solid yellow;
+`

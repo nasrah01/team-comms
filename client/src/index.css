@@ -16,10 +16,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* a {
-  text-decoration: none;
-}
+.str-chat-channel-list {
+    height: fit-content;
+    margin-bottom: 8px;
+  }
+  
+  .str-chat-channel {
+    height: 100%;
+  }
+  
+  .str-chat__load-more-button {
+    display: none;
+  }
+  
+  .str-chat__input-footer {
+    display: none;
+  }
+  
+  .str-chat__date-separator {
+    margin: 16px 24px;
+  }
 
-li {
-  list-style: none;
-} */
+  
