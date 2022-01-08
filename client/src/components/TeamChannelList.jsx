@@ -22,7 +22,7 @@ const TeamChannelList = ({children, error = false, loading, type, isCreating, se
 
   return (
     <ListContainer>
-      <div>
+      <ListWrapper>
         <p>{type === "team" ? "Channels" : "Direct Messages"}</p>
         <AddChannel
           isCreating={isCreating}
@@ -31,8 +31,9 @@ const TeamChannelList = ({children, error = false, loading, type, isCreating, se
           setIsEditing={setIsEditing}
           type={type === 'team' ? 'team' : 'messaging'}
         />
-      </div>
-      {children}
+      </ListWrapper>
+      <ListChild>{children}</ListChild>
+      
     </ListContainer>
   );
 };
@@ -43,3 +44,10 @@ const ListContainer = styled.div`
   background: lightgreen;
   border: 5px solid green;
 `
+
+const ListWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const ListChild = styled.div``

@@ -17,9 +17,9 @@ const CompanyHeader = () => {
 
 const SideBar = ({logout}) => {
   return (
-    <div>
+    <SideBarContainer>
       <AiOutlineLogout onClick={logout}/>
-    </div>
+    </SideBarContainer>
   )
 };
 
@@ -51,9 +51,9 @@ const ChannelListContent = ({isCreating, setIsCreating, setCreateType, setIsEdit
   const filters = { members: { $in: [client.userID] } };
 
   return (
-    <>
+    <ListContainer>
       <SideBar logout={logout} />
-      <div>
+      <ListWrapper>
         <CompanyHeader />
         <ChannelSearch setToggleContainer={setToggleContainer} />
         <ChannelList
@@ -104,8 +104,8 @@ const ChannelListContent = ({isCreating, setIsCreating, setCreateType, setIsEdit
             />
           )}
         />
-      </div>
-    </>
+      </ListWrapper>
+    </ListContainer>
   );
 }
 
@@ -143,5 +143,22 @@ export default ChannelListContainer
 
 const ChatContainer = styled.div`
   border: 5px solid red;
-  background: lightslategrey;
+  background: red;
+  height: 100vh;
 `
+const ListContainer = styled.div`
+  background: orange;
+`
+
+const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: #005fff;
+  width: 240px;
+`;
+const SideBarContainer = styled.div`
+  width: 72px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    #005fff;
+  box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.25);
+`;

@@ -55,9 +55,8 @@ function App() {
 export default App;
 
 const ChannelContainerWrapper = styled.div`
-  border: 5px solid orange;
   display: flex;
   flex: 1;
-  height: 100vh;
-  background: lightsalmon;
-`
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.33) 0px 1px 4px 0px;
+`;

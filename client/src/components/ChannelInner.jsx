@@ -80,7 +80,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
     return (
       <div>
         <p># {channel.data.name}</p>
-        <span style={{ display: "flex" }} onClick={() => setIsEditing(true)}>
+        <span style={{ display: "flex", width: "100%" }} onClick={() => setIsEditing(true)}>
           <ChannelInfo />
         </span>
       </div>
