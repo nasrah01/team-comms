@@ -125,3 +125,7 @@ body {
   right: 100%;
   border-radius: var(--border-radius-md);
 }
+
+.str-chat__avatar-fallback {
+  background-color: #6900ff !important;
+}

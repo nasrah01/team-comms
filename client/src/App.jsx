@@ -57,6 +57,6 @@ export default App;
 const ChannelContainerWrapper = styled.div`
   display: flex;
   flex: 1;
-  height: 100%;
+  height: 100vh;
   box-shadow: rgba(0, 0, 0, 0.33) 0px 1px 4px 0px;
 `;

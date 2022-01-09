@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useChatContext } from 'stream-chat-react';
 import { ResultsDropdown } from './';
+import { AiOutlineSearch } from 'react-icons/ai';
 import styled from 'styled-components';
 
 const ChannelSearch = ({ setToggleContainer }) => {
@@ -55,9 +56,9 @@ const ChannelSearch = ({ setToggleContainer }) => {
 
   return (
     <SearchContainer>
-      <div>search Icon</div>
+      <div></div>
       <div>
-        <input placeholder="" type="text" value={query} onChange={onSearch} />
+        <input placeholder='Search' type="text" value={query} onChange={onSearch} />
       </div>
       {query && (
         <ResultsDropdown

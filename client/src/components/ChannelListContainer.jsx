@@ -2,23 +2,28 @@ import React, { useState } from 'react';
 import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
-import { AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineLogout, AiOutlineTeam } from "react-icons/ai";
 import styled from "styled-components";
 
 const cookies = new Cookies();
 
 const CompanyHeader = () => {
   return (
-    <div>
-      <div className="text-3xl font-bold underline">Header</div>
-    </div>
+    <HeaderContainer>
+      <p>Team Chat</p>
+    </HeaderContainer>
   );
 }
 
 const SideBar = ({logout}) => {
   return (
     <SideBarContainer>
-      <AiOutlineLogout onClick={logout}/>
+      <div>
+        <AiOutlineTeam size={32}/>
+      </div>
+      <div>
+        <AiOutlineLogout onClick={logout} size={32}/>
+      </div>
     </SideBarContainer>
   )
 };
@@ -117,7 +122,6 @@ const ChannelListContainer = ({
   const [toggleContainer, setToggleContainer] = useState(false);
 
   return (
-    <>
       <ChatContainer
         style={{
           left: toggleContainer ? "0%" : "-89%",
@@ -135,30 +139,46 @@ const ChannelListContainer = ({
           setToggleContainer={setToggleContainer}
         />
       </ChatContainer>
-    </>
   );
 };
 
 export default ChannelListContainer
 
 const ChatContainer = styled.div`
-  border: 5px solid red;
-  background: red;
-  height: 100vh;
+  display: flex;
 `
 const ListContainer = styled.div`
-  background: orange;
+  display: flex;
 `
 
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background: #005fff;
-  width: 240px;
-`;
+  background: #6900ff;
+  width: 300px;
+  padding-top: 3rem;
+`
+
 const SideBarContainer = styled.div`
-  width: 72px;
+  width: 80px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    #005fff;
+    #6900ff;
   box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #fff;
+  padding-top: 3rem;
+
+  div {
+    padding: 1rem 0;
+  }
+`
+
+const HeaderContainer = styled.div`
+  color: #fff;
+  font-size: clamp(1.5rem, 2vw, 3rem);
+  font-family: cursive;
+  padding-left: .75rem;
 `;
