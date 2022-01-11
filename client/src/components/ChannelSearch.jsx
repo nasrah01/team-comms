@@ -56,10 +56,12 @@ const ChannelSearch = ({ setToggleContainer }) => {
 
   return (
     <SearchContainer>
-      <div></div>
+      <SearchWrapper>
       <div>
-        <input placeholder='Search' type="text" value={query} onChange={onSearch} />
+        <AiOutlineSearch size={16}/>
       </div>
+      <input placeholder='Search' type="text" value={query} onChange={onSearch} />
+      </SearchWrapper>
       {query && (
         <ResultsDropdown
           teamChannels={teamChannels}
@@ -77,5 +79,35 @@ const ChannelSearch = ({ setToggleContainer }) => {
 export default ChannelSearch
 
 const SearchContainer = styled.div`
-  border: 5px solid green;
-`
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #00000033;
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  color: white;
+
+  input {
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 16px;
+    outline: none;
+
+    ::placeholder {
+      color: rgba(255, 255, 255, 0.66);
+    }
+  }
+`;
