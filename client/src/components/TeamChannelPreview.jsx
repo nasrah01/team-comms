@@ -13,9 +13,9 @@ const TeamChannelPreview = ({
   const { channel: activeChannel, client } = useChatContext();
 
   const ChannelPreview = () => (
-    <p>
-      # {channel?.data?.name || channel?.data?.id}
-    </p>
+    <ChannelWrapper>
+      <p># {channel?.data?.name || channel?.data?.id}</p>
+    </ChannelWrapper>
   );
 
   const DirectPreview = () => {
@@ -24,14 +24,14 @@ const TeamChannelPreview = ({
     );
 
     return (
-      <div>
+      <DirectWrapper>
         <Avatar
           image={members[0]?.user?.image}
           name={members[0]?.user?.fullName || members[0]?.user?.id}
           size={24}
         />
         <p>{members[0]?.user?.fullName || members[0]?.user?.id}</p>
-      </div>
+      </DirectWrapper>
     );
   };
 
@@ -39,8 +39,8 @@ const TeamChannelPreview = ({
     <PreviewContainer
       className={
         channel?.id === activeChannel?.id
-          ? "channel-preview__wrapper__selected"
-          : "channel-preview__wrapper"
+          ? "container__selected"
+          : "container__wrapper"
       }
       onClick={() => {
         setIsCreating(false);
@@ -59,5 +59,29 @@ const TeamChannelPreview = ({
 export default TeamChannelPreview;
 
 const PreviewContainer = styled.div`
-  background: lightskyblue;
+  
 `
+
+const ChannelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  padding-left: 26px;
+  height: 100%;
+  width: 100%;
+  text-overflow: ellipsis;
+`
+
+const DirectWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  padding-left: 26px;
+  height: 100%;
+  width: 100%;
+  text-overflow: ellipsis;
+`;

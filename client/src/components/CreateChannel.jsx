@@ -73,5 +73,5 @@ export default CreateChannel;
 
 
 const CreateContainer = styled.div`
-  border: 5px solid blue;
+  border: 5px solid crimson;
 `

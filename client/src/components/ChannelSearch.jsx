@@ -57,9 +57,9 @@ const ChannelSearch = ({ setToggleContainer }) => {
   return (
     <SearchContainer>
       <SearchWrapper>
-      <div>
+      <SearchIcon>
         <AiOutlineSearch size={16}/>
-      </div>
+      </SearchIcon>
       <input placeholder='Search' type="text" value={query} onChange={onSearch} />
       </SearchWrapper>
       {query && (
@@ -102,7 +102,7 @@ const SearchWrapper = styled.div`
     background: none;
     border: none;
     color: #fff;
-    font-family: Helvetica Neue, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     outline: none;
 
@@ -111,3 +111,8 @@ const SearchWrapper = styled.div`
     }
   }
 `;
+const SearchIcon = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+`

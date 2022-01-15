@@ -146,23 +146,25 @@ export default ChannelListContainer
 
 const ChatContainer = styled.div`
   display: flex;
+  width: 30%;
 `
 const ListContainer = styled.div`
   display: flex;
+  width: 100%;
 `
 
 const ListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background: #6900ff;
-  width: 300px;
+  background: #0554f2;
+  width: 80%;
   padding-top: 3rem;
-`
+`;
 
 const SideBarContainer = styled.div`
-  width: 80px;
+  width: 20%;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    #6900ff;
+    #0554f2;
   box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
@@ -174,7 +176,7 @@ const SideBarContainer = styled.div`
   div {
     padding: 1rem 0;
   }
-`
+`;
 
 const HeaderContainer = styled.div`
   color: #fff;

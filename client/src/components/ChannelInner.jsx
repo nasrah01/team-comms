@@ -54,18 +54,18 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 
     if (channel.type === "messaging") {
       return (
-        <div>
+        <UserContainer>
           {members.map(({ user }, i) => (
-            <div key={i}>
+            <UserWrapper key={i}>
               <Avatar
                 image={user.image}
                 name={user.fullName || user.id}
-                size={32}
+                size={28}
               />
               <p>
                 {user.fullName || user.id}
               </p>
-            </div>
+            </UserWrapper>
           ))}
 
           {additionalMembers > 0 && (
@@ -73,7 +73,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
               and {additionalMembers} more
             </p>
           )}
-        </div>
+        </UserContainer>
       );
     }
 
@@ -95,12 +95,12 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 
   return (
     <MessagingContainer>
-      <MessagingHeader />
-      <div>
-        <p>
-          {getWatcherText(watcher_count)}
-        </p>
-      </div>
+      <Wrapper>
+        <MessagingHeader />
+        <OnlineUsers>
+          <p>{getWatcherText(watcher_count)}</p>
+        </OnlineUsers>
+      </Wrapper>
     </MessagingContainer>
   );
 };
@@ -109,4 +109,29 @@ export default ChannelInner;
 
 const MessagingContainer = styled.div`
   border: 5px solid yellow;
+  display: flex;
+  padding: 2rem 1rem;
+`
+
+const Wrapper = styled.div`
+  border: 1px solid pink;
+  display: flex;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+`;
+
+const UserContainer = styled.div`
+  border: 1px solid green;
+  display: flex;
+  align-items: center;
+`
+
+const UserWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const OnlineUsers = styled.div`
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
 `
