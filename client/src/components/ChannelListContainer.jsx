@@ -158,7 +158,7 @@ const ListWrapper = styled.div`
   flex-direction: column;
   background: #0554f2;
   width: 80%;
-  padding-top: 3rem;
+  padding: 2rem 0;
 `;
 
 const SideBarContainer = styled.div`
@@ -171,7 +171,7 @@ const SideBarContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: #fff;
-  padding-top: 3rem;
+  padding-top: 2rem;
 
   div {
     padding: 1rem 0;

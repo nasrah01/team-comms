@@ -30,7 +30,7 @@ const ChannelInner = ({ setIsEditing }) => {
 
   return (
     <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
-      <div style={{ display: "flex", width: "100%" }}>
+      <div style={{ display: "flex", width: "100%"}}>
         <Window>
           <TeamChannelHeader setIsEditing={setIsEditing} />
           <MessageList />
@@ -78,12 +78,12 @@ const TeamChannelHeader = ({ setIsEditing }) => {
     }
 
     return (
-      <div>
-        <p># {channel.data.name}</p>
+      <EditingChannel>
+        <p>{channel.data.name}</p>
         <span style={{ display: "flex", width: "100%" }} onClick={() => setIsEditing(true)}>
           <ChannelInfo />
         </span>
-      </div>
+      </EditingChannel>
     );
   };
 
@@ -108,19 +108,18 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 export default ChannelInner;
 
 const MessagingContainer = styled.div`
-  border: 5px solid yellow;
+  border-bottom: 1px solid #e6e6e6;
   display: flex;
-  padding: 2rem 1rem;
+  padding: 1.85rem 1rem;
 `
 
 const Wrapper = styled.div`
-  border: 1px solid pink;
   display: flex;
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const UserContainer = styled.div`
-  border: 1px solid green;
   display: flex;
   align-items: center;
 `
@@ -128,10 +127,27 @@ const UserContainer = styled.div`
 const UserWrapper = styled.div`
   display: flex;
   align-items: center;
-`
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #2c2c30;
+  padding-right: 2rem;
+`;
 
 const OnlineUsers = styled.div`
-  border: 1px solid red;
   display: flex;
   align-items: center;
-`
+  font-size: 1.2rem;
+  color: #858688;
+`;
+
+const EditingChannel = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #2c2c30;
+
+  p {
+    padding-right: 0.75rem;
+  }
+`;
