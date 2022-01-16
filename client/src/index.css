@@ -97,10 +97,6 @@ body {
   border-radius: var(--border-radius-md);
 }
 
-.str-chat__avatar-fallback {
-  background-color: #0554f2 !important;
-}
-
 .container__wrapper {
   height: 37px;
   display: flex;

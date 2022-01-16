@@ -60,7 +60,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
               <Avatar
                 image={user.image}
                 name={user.fullName || user.id}
-                size={28}
+                size={24}
               />
               <p>
                 {user.fullName || user.id}
@@ -108,9 +108,10 @@ const TeamChannelHeader = ({ setIsEditing }) => {
 export default ChannelInner;
 
 const MessagingContainer = styled.div`
-  border-bottom: 1px solid #e6e6e6;
   display: flex;
-  padding: 1.85rem 1rem;
+  padding: 2rem;
+  border-bottom: 1px solid #e6e6e6;
+  height: 65px;
 `
 
 const Wrapper = styled.div`

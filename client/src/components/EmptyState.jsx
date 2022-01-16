@@ -2,8 +2,6 @@ import React from "react";
 import { useChatContext } from "stream-chat-react";
 import styled from 'styled-components'
 
-import { HashIcon } from "../assets/HashIcon";
-
 const EmptyState = () => {
   const { channel, client } = useChatContext();
   const members = Object.values(channel?.state?.members).filter(
@@ -50,7 +48,6 @@ const EmptyState = () => {
 
   return (
     <EmptyContainer>
-      {channel.type === "team" ? <HashIcon /> : null}
       <EmptyFirst>
         This is the beginning of your chat history
         {channel.type === "team" ? " in " : " with "}

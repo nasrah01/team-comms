@@ -158,7 +158,6 @@ const ListWrapper = styled.div`
   flex-direction: column;
   background: #0554f2;
   width: 80%;
-  padding: 2rem 0;
 `;
 
 const SideBarContainer = styled.div`
@@ -179,6 +178,9 @@ const SideBarContainer = styled.div`
 `;
 
 const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 65px;
   color: #fff;
   font-size: clamp(1.5rem, 2vw, 3rem);
   font-family: cursive;

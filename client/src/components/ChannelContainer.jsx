@@ -9,9 +9,9 @@ const ChannelContainer = ({isCreating, setIsCreating, isEditing, setIsEditing, c
 
   if(isCreating) {
     return (
-      <div>
+      <CreateContainer>
         <CreateChannel createType={createType} setIsCreating={setIsCreating}/>
-      </div>
+      </CreateContainer>
     )
   }
 
@@ -42,6 +42,11 @@ const ChannelContainer = ({isCreating, setIsCreating, isEditing, setIsEditing, c
 export default ChannelContainer
 
 const ChannelContents = styled.div`
+  height: 100%;
+  width: 100%;
+`
+
+const CreateContainer = styled.div`
   height: 100%;
   width: 100%;
 `

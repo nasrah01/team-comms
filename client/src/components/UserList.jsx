@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
-import { TiTick } from "react-icons/ti";
+import styled from 'styled-components';
+import { Invite } from '../assets/Invite';
 
 const ListContainer = ({ children }) => {
   return (
-    <div>
-      <div>
+    <UserContent>
+      <UserHeader>
         <p>User</p>
         <p>Invite</p>
-      </div>
+      </UserHeader>
       {children}
-    </div>
+    </UserContent>
   )
 }
 
@@ -30,13 +31,13 @@ const UserItem = ({ user, setSelectedUsers }) => {
    };
 
    return (
-     <div onClick={handleSelect}>
-       <div>
+     <SelectContainer onClick={handleSelect}>
+       <SelectWrapper>
          <Avatar image={user.image} name={user.fullName || user.id} size={32} />
          <p>{user.fullName || user.id}</p>
-       </div>
-       {selected ? <TiTick /> : ''}
-     </div>
+       </SelectWrapper>
+       {selected ? <Invite /> : <UserInviteEmpty></UserInviteEmpty>}
+     </SelectContainer>
    );
 }
 
@@ -72,14 +73,15 @@ const UserList = ({ setSelectedUsers }) => {
     };
 
     if (client) getUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (error) {
     return (
       <ListContainer>
-        <div>
+        <UserMessage>
           Error loading, please refresh and try again.
-        </div>
+        </UserMessage>
       </ListContainer>
     );
   }
@@ -87,7 +89,7 @@ const UserList = ({ setSelectedUsers }) => {
   if (listEmpty) {
     return (
       <ListContainer>
-        <div>No users found.</div>
+        <UserMessage>No users found.</UserMessage>
       </ListContainer>
     );
   }
@@ -95,7 +97,7 @@ const UserList = ({ setSelectedUsers }) => {
   return (
     <ListContainer>
       {loading ? (
-        <div>Loading users...</div>
+        <UserMessage>Loading users...</UserMessage>
       ) : (
         users?.map((user, i) => (
           <UserItem
@@ -111,3 +113,75 @@ const UserList = ({ setSelectedUsers }) => {
 }
 
 export default UserList
+
+const UserContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const UserHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+
+  p {
+    font-size: 14px;
+    line-height: 17px;
+    color: #858688;
+    margin-top: 16px;
+  }
+
+  p:first-child {
+    width: 60%;
+  }
+
+  p:nth-child(2) {
+    width: 30%;
+  }
+`;
+
+const SelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  &::hover {
+    background: #f7f6f8;
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 17px;
+    color: #2c2c30;
+  }
+`;
+
+const SelectWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 60%;
+
+  p {
+    font-weight: 500;
+  }
+`;
+
+const UserInviteEmpty = styled.div`
+  height: 28px;
+  width: 28px;
+  background: #f7f6f8;
+  border: 1px solid #dedddf;
+  border-radius: 14px;
+  box-sizing: border-box;
+  margin-left: 2px;
+`;
+
+const UserMessage = styled.div`
+  font-size: 16px;
+  color: #2c2c30;
+  margin: 20px;
+`;
