@@ -176,35 +176,11 @@ const ResultsContainer = styled.div`
 `;
 
 const ChannelWrapper = styled.div`
-  .search__results {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
-  }
-
-  .search__results-focus {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
-  }
+ 
 `;
 
 const UserWrapper = styled.div`
-  .search__results {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
-  }
-
-  .search__results-focus {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
-  }
+ 
 `;
 
 const Hashtag = styled.div`

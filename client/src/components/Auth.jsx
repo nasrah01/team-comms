@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import logo from '../assets/images/chat01.png';
+import pattern from '../assets/images/pattern1.jpg';
 import styled from "styled-components";
 
 const cookies = new Cookies();
@@ -154,7 +155,7 @@ export default Auth
 
 const FormContainer = styled.div`
   min-height: 100vh;
-  background: #ffffff;
+  background-image: url(${pattern});
   display: flex;
   justify-content: center;
   align-items: center;

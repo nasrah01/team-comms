@@ -18,12 +18,12 @@ const CompanyHeader = () => {
 const SideBar = ({logout}) => {
   return (
     <SideBarContainer>
-      <div>
+      <HeaderIcon>
         <AiOutlineTeam size={32}/>
-      </div>
-      <div>
+      </HeaderIcon>
+      <LogoutIcon>
         <AiOutlineLogout onClick={logout} size={32}/>
-      </div>
+      </LogoutIcon>
     </SideBarContainer>
   )
 };
@@ -170,12 +170,20 @@ const SideBarContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   color: #fff;
-  padding-top: 2rem;
+  padding-top: 1rem;
 
   div {
     padding: 1rem 0;
   }
 `;
+
+const HeaderIcon = styled.div`
+  cursor: pointer;
+`
+
+const LogoutIcon = styled.div`
+cursor: pointer;
+`
 
 const HeaderContainer = styled.div`
   display: flex;
