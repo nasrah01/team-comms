@@ -14,7 +14,6 @@ app.use(express.urlencoded({extended: false}));
 
 app.get('/', (req, res) => {
   console.log(req.body);
-  res.send('Hello, World');
 })
 
 app.use('/auth', authRoutes)

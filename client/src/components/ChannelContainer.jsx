@@ -3,9 +3,7 @@ import { Channel, MessageTeam } from 'stream-chat-react';
 import { ChannelInner, CreateChannel, EditChannel, EmptyState } from './';
 import styled from 'styled-components';
 
-
 const ChannelContainer = ({isCreating, setIsCreating, isEditing, setIsEditing, createType}) => {
-
 
   if(isCreating) {
     return (

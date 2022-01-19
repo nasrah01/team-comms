@@ -13,14 +13,17 @@ const cookies = new Cookies();
 const authToken = cookies.get('token');
 
 if(authToken) {
-  client.connectUser({
-    name: cookies.get("username"),
-    fullName: cookies.get("fullName"),
-    id: cookies.get("userId"),
-    avatar: cookies.get("avatar"),
-    email: cookies.get("email"),
-    hashedPassword: cookies.get("hashedPassword"),
-  }, authToken);
+  client.connectUser(
+    {
+      name: cookies.get("username"),
+      fullName: cookies.get("fullName"),
+      id: cookies.get("userId"),
+      image: cookies.get("avatarURL"),
+      email: cookies.get("email"),
+      hashedPassword: cookies.get("hashedPassword"),
+    },
+    authToken
+  );
 }
 
 function App() {

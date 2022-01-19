@@ -8,14 +8,13 @@ import styled from "styled-components";
 const cookies = new Cookies();
 
 const initialState = {
-  fullName: '',
-  username: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  avatar: ''
-
-}
+  fullName: "",
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  avatarURL: "",
+};
 
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(true);
@@ -25,12 +24,12 @@ const Auth = () => {
 
     e.preventDefault();
 
-    const {username, password, email, avatar} = form;
+    const { username, password, email, avatarURL } = form;
 
     const URL = 'http://localhost:5000/auth';
 
     const { data: {token, userId, hashedPassword, fullName} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-      username, fullName: form.fullName, password, email, avatar
+      username, fullName: form.fullName, password, email, avatarURL
     });
 
     cookies.set('token', token);
@@ -41,7 +40,7 @@ const Auth = () => {
     if(isSignup) {
       cookies.set("email", email);
       cookies.set("hashedPassword", hashedPassword);
-      cookies.set("avatar");
+      cookies.set('avatarURL', avatarURL);
     }
 
     window.location.reload();
@@ -90,9 +89,9 @@ const Auth = () => {
             </div>
             {isSignup && (
               <div>
-                <label htmlFor="avatar">Avatar</label>
+                <label htmlFor="avatarURL">Avatar URL</label>
                 <input
-                  name="avatar"
+                  name="avatarURL"
                   type="text"
                   placeholder="Avatar URL"
                   onChange={handleChange}

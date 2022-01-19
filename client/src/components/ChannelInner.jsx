@@ -60,7 +60,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
               <Avatar
                 image={user.image}
                 name={user.fullName || user.id}
-                size={24}
+                size={42}
               />
               <p>
                 {user.fullName || user.id}
