@@ -33,7 +33,11 @@ const UserItem = ({ user, setSelectedUsers }) => {
    return (
      <SelectContainer onClick={handleSelect}>
        <SelectWrapper>
-         <Avatar image={user.image} name={user.fullName || user.id} size={32} />
+         <Avatar
+           image={user.avatar}
+           name={user.fullName || user.id}
+           size={28}
+         />
          <p>{user.fullName || user.id}</p>
        </SelectWrapper>
        {selected ? <Invite /> : <UserInviteEmpty></UserInviteEmpty>}

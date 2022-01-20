@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
-import { AiOutlineLogout, AiOutlineTeam } from "react-icons/ai";
+import { AiOutlineTeam } from "react-icons/ai";
+import { FiLogOut } from 'react-icons/fi'
 import styled from "styled-components";
 
 const cookies = new Cookies();
@@ -19,13 +20,13 @@ const SideBar = ({logout}) => {
   return (
     <SideBarContainer>
       <HeaderIcon>
-        <AiOutlineTeam size={32}/>
+        <AiOutlineTeam size={32} />
       </HeaderIcon>
       <LogoutIcon>
-        <AiOutlineLogout onClick={logout} size={32}/>
+        <FiLogOut onClick={logout} size={32} />
       </LogoutIcon>
     </SideBarContainer>
-  )
+  );
 };
 
 const channelTeamFilter = (channels) => {

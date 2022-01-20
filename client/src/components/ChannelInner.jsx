@@ -58,7 +58,7 @@ const TeamChannelHeader = ({ setIsEditing }) => {
           {members.map(({ user }, i) => (
             <UserWrapper key={i}>
               <Avatar
-                image={user.image}
+                image={user.avatar}
                 name={user.fullName || user.id}
                 size={42}
               />
