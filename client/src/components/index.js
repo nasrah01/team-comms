@@ -10,3 +10,6 @@ export { default as EditChannel } from "./EditChannel";
 export { default as UserList } from "./UserList";
 export { default as ResultsDropdown } from "./ResultsDropdown";
 export { default as EmptyState } from "./EmptyState";
+export { default as ThreadMessageInput } from './ThreadMessageInput';
+export { default as TeamMessageInput } from "./TeamMessageInput";
+export { default as TeamTypingIndicator } from "./TeamTypingIndicator";

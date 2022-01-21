@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-import logo from '../assets/images/chat01.png';
-import pattern from '../assets/images/pattern1.jpg';
+import logo from '../assets/images/chat-group.png';
+import pattern from '../assets/images/background.webp';
 import styled from "styled-components";
 
 const cookies = new Cookies();
@@ -59,7 +59,7 @@ const Auth = () => {
     <FormContainer>
       <FormWrapper>
         <FormHeader>
-          <img src={logo} alt="business logo" height={210} width={300} />
+          <img src={logo} alt="business logo" height={100} width={100} />
           <h2>Team Chat</h2>
           <p>{isSignup ? "Sign Up" : "Sign In"}</p>
         </FormHeader>
@@ -155,13 +155,16 @@ export default Auth
 const FormContainer = styled.div`
   min-height: 100vh;
   background-image: url(${pattern});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const FormWrapper = styled.div`
-  background-color: #fff;
+  background-color: transparent;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -173,6 +176,7 @@ const FormWrapper = styled.div`
 `;
 const FormHeader = styled.div`
   text-align: center;
+  padding: 0 5rem;
 
   h2 {
     font-size: clamp(1.5rem, 2.5vw, 4rem);
@@ -248,5 +252,11 @@ const FormContent = styled.div`
 
   span {
     cursor: pointer;
+    color: #005fff;
+    padding-left: 0.5rem;
+  }
+
+  p {
+    font-size: clamp(1rem, 1vw, 1.4rem);
   }
 `;

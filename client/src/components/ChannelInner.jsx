@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext, Avatar, useChannelStateContext, useChatContext } from "stream-chat-react";
 import {ChannelInfo} from '../assets/ChannelInfo';
+import { ThreadMessageInput } from './';
 import styled from 'styled-components';
 
 export const GiphyContext = React.createContext({});
@@ -30,13 +31,18 @@ const ChannelInner = ({ setIsEditing }) => {
 
   return (
     <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
-      <div style={{ display: "flex", width: "100%"}}>
+      <div style={{ display: "flex", width: "100%" }}>
         <Window>
           <TeamChannelHeader setIsEditing={setIsEditing} />
           <MessageList />
-          <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
+          <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
-        <Thread />
+        <Thread
+          additionalMessageInputProps={{
+            grow: true,
+            Input: ThreadMessageInput,
+          }}
+        />
       </div>
     </GiphyContext.Provider>
   );
