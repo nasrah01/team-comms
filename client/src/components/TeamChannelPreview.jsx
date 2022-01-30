@@ -23,12 +23,14 @@ const TeamChannelPreview = ({
       ({ user }) => user.id !== client.userID
     );
 
+    console.log(members)
+
     return (
       <DirectWrapper>
         <Avatar
           image={members[0]?.user?.image}
           name={members[0]?.user?.fullName || members[0]?.user?.id}
-          size={24}
+          size={28}
         />
         <p>{members[0]?.user?.fullName || members[0]?.user?.id}</p>
       </DirectWrapper>

@@ -34,9 +34,9 @@ const UserItem = ({ user, setSelectedUsers }) => {
      <SelectContainer onClick={handleSelect}>
        <SelectWrapper>
          <Avatar
-           image={user.avatar}
+           image={user.image}
            name={user.fullName || user.id}
-           size={28}
+           size={42}
          />
          <p>{user.fullName || user.id}</p>
        </SelectWrapper>

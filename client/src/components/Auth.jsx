@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-import logo from '../assets/images/chat-group.png';
-import pattern from '../assets/images/background.webp';
+import background from '../assets/images/background.jpg';
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
 const cookies = new Cookies();
 
@@ -19,6 +19,7 @@ const initialState = {
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(true);
   const [form, setForm] = useState(initialState);
+  const { register, handleSubmit,  formState: { errors } } = useForm();
 
   const formSubmit = async (e) => {
 
@@ -28,22 +29,34 @@ const Auth = () => {
 
     const URL = 'http://localhost:5000/auth';
 
-    const { data: {token, userId, hashedPassword, fullName} } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
-      username, fullName: form.fullName, password, email, avatarURL
-    });
+    try {
+      const {
+        data: { token, userId, hashedPassword, fullName },
+      } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
+        username,
+        fullName: form.fullName,
+        password,
+        email,
+        avatarURL,
+      });
 
-    cookies.set('token', token);
-    cookies.set("username", username);
-    cookies.set("fullName", fullName);
-    cookies.set("userId", userId);
+      cookies.set("token", token);
+      cookies.set("username", username);
+      cookies.set("fullName", fullName);
+      cookies.set("userId", userId);
 
-    if(isSignup) {
-      cookies.set("email", email);
-      cookies.set("hashedPassword", hashedPassword);
-      cookies.set('avatarURL', avatarURL);
+      if (isSignup) {
+        cookies.set("email", email);
+        cookies.set("hashedPassword", hashedPassword);
+        cookies.set("avatarURL", avatarURL);
+      }
+
+      window.location.reload();
+      
+    } catch (error) {
+      console.log(error.message)
     }
 
-    window.location.reload();
     
   }
 
@@ -59,7 +72,6 @@ const Auth = () => {
     <FormContainer>
       <FormWrapper>
         <FormHeader>
-          <img src={logo} alt="business logo" height={100} width={100} />
           <h2>Team Chat</h2>
           <p>{isSignup ? "Sign Up" : "Sign In"}</p>
         </FormHeader>
@@ -154,33 +166,39 @@ export default Auth
 
 const FormContainer = styled.div`
   min-height: 100vh;
-  background-image: url(${pattern});
+  background-image: url(${background});
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
 const FormWrapper = styled.div`
-  background-color: transparent;
+  height: 100vh;
+  width: 40%;
+  background-color: #fff;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 10rem;
   box-shadow: 0px 1px 5px rgb(0, 0, 0, .3);
   border-radius: 5px;
   transition: 0.8s ease;
 `;
+
 const FormHeader = styled.div`
   text-align: center;
-  padding: 0 5rem;
+  padding: 0 5rem 3rem 5rem;
+  border-bottom: 2px solid #ebebeb;
+  width: 100%;
 
   h2 {
     font-size: clamp(1.5rem, 2.5vw, 4rem);
     font-family: cursive;
+    padding-bottom: .5rem;
   }
 
   p {
@@ -193,32 +211,36 @@ const FormHeader = styled.div`
 
 const FormContent = styled.div`
   padding: 2rem 0;
+  width: 90%;
 
   div {
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    margin-bottom: 1rem;
   }
 
   label {
     margin-bottom: 0.45rem;
     color: rgb(61, 79, 88);
-    font-size: clamp(1rem, 1vw, 1.4rem);
-    letter-spacing: 0.4px;
-    line-height: 1.3;
+    font-size: clamp(1rem, 1vw, 1.2rem);
+    text-transform: uppercase;
+    font-weight: 700;
   }
 
   input {
-    padding: 0.55rem 0.4rem;
+    padding: 1rem 0.4rem;
+    box-shadow: 0px 4px 12px 0px rgba(79, 114, 205, 0.3);
     border: 1px solid rgb(184, 196, 194);
     border-radius: 4px;
     font-size: 14px;
     outline: none;
     transition: all 150ms ease-in-out 0s;
-    width: 250px;
   }
 
   input::placeholder {
+    padding-left: 0.5rem;
     color: #b1b1b1;
     width: 100%;
     font-weight: unset;
@@ -231,7 +253,7 @@ const FormContent = styled.div`
   input:focus,
   input:active {
     box-shadow: 0px 0px 0px 1.5px #005fff;
-    border-color: #005fff;
+    border-color: rgb(0, 95, 255);
   }
 
   button {
@@ -258,5 +280,6 @@ const FormContent = styled.div`
 
   p {
     font-size: clamp(1rem, 1vw, 1.4rem);
+    text-align: center;
   }
 `;

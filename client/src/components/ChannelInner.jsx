@@ -58,13 +58,15 @@ const TeamChannelHeader = ({ setIsEditing }) => {
     );
     const additionalMembers = members.length - 3;
 
+    console.log(members)
+
     if (channel.type === "messaging") {
       return (
         <UserContainer>
           {members.map(({ user }, i) => (
             <UserWrapper key={i}>
               <Avatar
-                image={user.avatar}
+                image={user.image}
                 name={user.fullName || user.id}
                 size={42}
               />
