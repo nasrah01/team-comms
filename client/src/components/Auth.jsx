@@ -76,7 +76,7 @@ const Auth = () => {
           <p>{isSignup ? "Sign Up" : "Sign In"}</p>
         </FormHeader>
         <FormContent>
-          <form className="mt-8 space-y-6" onSubmit={formSubmit}>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit(formSubmit)}>
             {isSignup && (
               <div>
                 <label htmlFor="fullName">Full Name</label>
@@ -85,8 +85,15 @@ const Auth = () => {
                   type="text"
                   placeholder="Full Name"
                   onChange={handleChange}
-                  required
+                  {...register("fullName", {
+                    required: true,
+                    pattern: {
+                      value: /^[a-zA-Z]+ [a-zA-Z]+$/,
+                      message: "Invalid characters please try again",
+                    },
+                  })}
                 />
+                {errors.fullName && <span>{errors.email.message}</span>}
               </div>
             )}
             <div>
@@ -96,8 +103,12 @@ const Auth = () => {
                 type="text"
                 placeholder="Username"
                 onChange={handleChange}
-                required
+                {...register("username", {
+                  required: "minimum of 8 characters",
+                  minLength: 8,
+                })}
               />
+              {errors.username && <span>{errors.email.message}</span>}
             </div>
             {isSignup && (
               <div>
@@ -118,8 +129,15 @@ const Auth = () => {
                   type="text"
                   placeholder="Email"
                   onChange={handleChange}
-                  required
+                  {...register("email", {
+                    required: "please enter your email",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "invalid email please try again",
+                    },
+                  })}
                 />
+                {errors.email && <span>{errors.email.message}</span>}
               </div>
             )}
             <div>
