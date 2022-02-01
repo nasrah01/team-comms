@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 import background from '../assets/images/background.jpg';
@@ -19,11 +19,11 @@ const initialState = {
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(true);
   const [form, setForm] = useState(initialState);
-  const { register, handleSubmit,  formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
 
-  const formSubmit = async (e) => {
-
-    e.preventDefault();
+  const formSubmit = async () => {
 
     const { username, password, email, avatarURL } = form;
 
@@ -54,7 +54,7 @@ const Auth = () => {
       window.location.reload();
       
     } catch (error) {
-      console.log(error.message)
+      console.log(error)
     }
 
     
@@ -76,7 +76,7 @@ const Auth = () => {
           <p>{isSignup ? "Sign Up" : "Sign In"}</p>
         </FormHeader>
         <FormContent>
-          <form className="mt-8 space-y-6" onSubmit={handleSubmit(formSubmit)}>
+          <form onSubmit={handleSubmit(formSubmit)}>
             {isSignup && (
               <div>
                 <label htmlFor="fullName">Full Name</label>
@@ -86,14 +86,14 @@ const Auth = () => {
                   placeholder="Full Name"
                   onChange={handleChange}
                   {...register("fullName", {
-                    required: true,
+                    required: "Please enter your full name",
                     pattern: {
                       value: /^[a-zA-Z]+ [a-zA-Z]+$/,
-                      message: "Invalid characters please try again",
+                      message: "Invalid characters used please try again",
                     },
                   })}
                 />
-                {errors.fullName && <span>{errors.email.message}</span>}
+                {errors.fullName && <FormErrors>{errors.fullName.message}</FormErrors>}
               </div>
             )}
             <div>
@@ -104,11 +104,11 @@ const Auth = () => {
                 placeholder="Username"
                 onChange={handleChange}
                 {...register("username", {
-                  required: "minimum of 8 characters",
+                  required: "Enter your username",
                   minLength: 8,
                 })}
               />
-              {errors.username && <span>{errors.email.message}</span>}
+              {errors.username && <FormErrors>{errors.username.message}</FormErrors>}
             </div>
             {isSignup && (
               <div>
@@ -130,14 +130,14 @@ const Auth = () => {
                   placeholder="Email"
                   onChange={handleChange}
                   {...register("email", {
-                    required: "please enter your email",
+                    required: "Please enter your email",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "invalid email please try again",
+                      message: "Invalid email please try again",
                     },
                   })}
                 />
-                {errors.email && <span>{errors.email.message}</span>}
+                {errors.email && <FormErrors>{errors.email.message}</FormErrors>}
               </div>
             )}
             <div>
@@ -147,8 +147,15 @@ const Auth = () => {
                 type="password"
                 placeholder="Password"
                 onChange={handleChange}
-                required
+                {...register("password", {
+                  required: "Enter your password",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
               />
+              {errors.password && <FormErrors>{errors.password.message}</FormErrors>}
             </div>
             {isSignup && (
               <div>
@@ -158,8 +165,9 @@ const Auth = () => {
                   type="password"
                   placeholder="Confirm Password"
                   onChange={handleChange}
-                  required
+                  {...register("confirmPassword", {validate: value => value === password.current || "Passwords do not match"})}
                 />
+                {errors.confirmPassword && <FormErrors>{errors.confirmPassword.message}</FormErrors>}
               </div>
             )}
             <div>
@@ -194,23 +202,23 @@ const FormContainer = styled.div`
 `;
 
 const FormWrapper = styled.div`
-  height: 100vh;
-  width: 40%;
-  background-color: #fff;
+  min-height: 100vh;
+  background-color: #f8f8ff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10rem;
-  box-shadow: 0px 1px 5px rgb(0, 0, 0, .3);
+  box-shadow: 0px 1px 5px rgb(0, 0, 0, 0.3);
   border-radius: 5px;
   transition: 0.8s ease;
 `;
 
 const FormHeader = styled.div`
   text-align: center;
-  padding: 0 5rem 3rem 5rem;
-  border-bottom: 2px solid #ebebeb;
+  padding: 0 3rem 3rem 3rem;
+  margin-bottom : 2rem;
+  border-bottom: 1px solid #ebebeb;
   width: 100%;
 
   h2 {
@@ -228,7 +236,6 @@ const FormHeader = styled.div`
 `;
 
 const FormContent = styled.div`
-  padding: 2rem 0;
   width: 90%;
 
   div {
@@ -236,11 +243,10 @@ const FormContent = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 1rem;
   }
 
   label {
-    margin-bottom: 0.45rem;
+    margin: 1rem 0 0.45rem 0;
     color: rgb(61, 79, 88);
     font-size: clamp(1rem, 1vw, 1.2rem);
     text-transform: uppercase;
@@ -248,13 +254,14 @@ const FormContent = styled.div`
   }
 
   input {
-    padding: 1rem 0.4rem;
+    padding: 1.4rem 0.4rem;
     box-shadow: 0px 4px 12px 0px rgba(79, 114, 205, 0.3);
     border: 1px solid rgb(184, 196, 194);
     border-radius: 4px;
     font-size: 14px;
     outline: none;
     transition: all 150ms ease-in-out 0s;
+    width: 400px;
   }
 
   input::placeholder {
@@ -279,8 +286,11 @@ const FormContent = styled.div`
     background: #005fff;
     border: 1px solid #005fff;
     color: #fff;
-    font-weight: 500;
-    padding: 0.7rem 1.2rem;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 1.2vw, 2rem);
+    padding: 1.4rem 0.4rem;
+    width: 400px;
+    margin: 1.5rem 0;
     outline: none;
     cursor: pointer;
     transition: 0.3s ease;
@@ -300,4 +310,10 @@ const FormContent = styled.div`
     font-size: clamp(1rem, 1vw, 1.4rem);
     text-align: center;
   }
+`;
+
+const FormErrors = styled.div`
+  color: #c51244;
+  font-size: clamp(0.8rem, 1vw, 1.2rem);
+  font-style: italic;
 `;
