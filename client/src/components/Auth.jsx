@@ -29,7 +29,6 @@ const Auth = () => {
 
     const URL = 'http://localhost:5000/auth';
 
-    try {
       const {
         data: { token, userId, hashedPassword, fullName },
       } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
@@ -52,12 +51,7 @@ const Auth = () => {
       }
 
       window.location.reload();
-      
-    } catch (error) {
-      console.log(error)
-    }
-
-    
+   
   }
 
   const handleChange = (e) => {
@@ -93,7 +87,9 @@ const Auth = () => {
                     },
                   })}
                 />
-                {errors.fullName && <FormErrors>{errors.fullName.message}</FormErrors>}
+                {errors.fullName && (
+                  <FormErrors>{errors.fullName.message}</FormErrors>
+                )}
               </div>
             )}
             <div>
@@ -104,11 +100,13 @@ const Auth = () => {
                 placeholder="Username"
                 onChange={handleChange}
                 {...register("username", {
-                  required: "Enter your username",
-                  minLength: 8,
+                  required: true,
+                    message: "Enter username",
                 })}
               />
-              {errors.username && <FormErrors>{errors.username.message}</FormErrors>}
+              {errors.username && (
+                <FormErrors>{errors.username.message}</FormErrors>
+              )}
             </div>
             {isSignup && (
               <div>
@@ -137,7 +135,9 @@ const Auth = () => {
                     },
                   })}
                 />
-                {errors.email && <FormErrors>{errors.email.message}</FormErrors>}
+                {errors.email && (
+                  <FormErrors>{errors.email.message}</FormErrors>
+                )}
               </div>
             )}
             <div>
@@ -155,7 +155,9 @@ const Auth = () => {
                   },
                 })}
               />
-              {errors.password && <FormErrors>{errors.password.message}</FormErrors>}
+              {errors.password && (
+                <FormErrors>{errors.password.message}</FormErrors>
+              )}
             </div>
             {isSignup && (
               <div>
@@ -165,9 +167,14 @@ const Auth = () => {
                   type="password"
                   placeholder="Confirm Password"
                   onChange={handleChange}
-                  {...register("confirmPassword", {validate: value => value === password.current || "Passwords do not match"})}
+                  {...register("confirmPassword", {
+                    validate: (value) =>
+                      value === password.current || "Passwords do not match",
+                  })}
                 />
-                {errors.confirmPassword && <FormErrors>{errors.confirmPassword.message}</FormErrors>}
+                {errors.confirmPassword && (
+                  <FormErrors>{errors.confirmPassword.message}</FormErrors>
+                )}
               </div>
             )}
             <div>
