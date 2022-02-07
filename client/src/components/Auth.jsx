@@ -37,7 +37,7 @@ const Auth = () => {
         password,
         email,
         avatarURL,
-      });
+      })
 
       cookies.set("token", token);
       cookies.set("username", username);
@@ -99,14 +99,9 @@ const Auth = () => {
                 type="text"
                 placeholder="Username"
                 onChange={handleChange}
-                {...register("username", {
-                  required: true,
-                    message: "Enter username",
-                })}
+                {...register("username", {required: true})}
               />
-              {errors.username && (
-                <FormErrors>{errors.username.message}</FormErrors>
-              )}
+              {errors.username && <FormErrors>Enter username</FormErrors>}
             </div>
             {isSignup && (
               <div>
@@ -202,7 +197,7 @@ const FormContainer = styled.div`
   background-image: url(${background});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
+  background-size: contain;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -210,7 +205,7 @@ const FormContainer = styled.div`
 
 const FormWrapper = styled.div`
   min-height: 100vh;
-  background-color: #f8f8ff;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -314,7 +309,7 @@ const FormContent = styled.div`
   }
 
   p {
-    font-size: clamp(1rem, 1vw, 1.4rem);
+    font-size: clamp(1.4rem, 1.2vw, 2rem);
     text-align: center;
   }
 `;
